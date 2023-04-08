@@ -65,7 +65,7 @@ router.post('/login', [
 
         const passwordCompare = await bcrypt.compare(password, user.password);
         if (!passwordCompare) {
-            return res.status(400).json({ error: "Sorry password does not exist" });
+            return res.status(400).json({ success:false,error: "Sorry password does not exist" });
         }
         const data = {
             user: {
@@ -73,7 +73,7 @@ router.post('/login', [
             }
         };
         const authToken = jwt.sign(data, JWT_SECRET);
-        res.json({ authToken });
+        res.json({ success:true,authToken });
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Some error occured");
