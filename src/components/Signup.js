@@ -22,7 +22,7 @@ export const Signup = (props) => {
         });
         const json = await response.json();
         if (json.success) {
-            localStorage.setItem('token', json.authtoken);
+            localStorage.setItem('token', json.authToken);
             history("/")
             props.showAlert("Account Created successfully","success");
         }else{
@@ -34,8 +34,9 @@ export const Signup = (props) => {
         setcredentials({ ...credentials, [ e.target.name ]: e.target.value });
     };
     return (
-        <div>
+        <div className='mt-3'>
             <div className='contaier'>
+                <h3>SignUp to use myNoteBook</h3>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="name">Name</label>

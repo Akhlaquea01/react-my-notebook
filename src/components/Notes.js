@@ -2,24 +2,26 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import noteContext from '../context/notes/NoteContext';
 import NoteItem from './NoteItem';
 import AddNote from './AddNote';
+// import { useNavigate } from 'react-router-dom';
 
 
 function Notes(props) {
     const context = useContext(noteContext);
     const { notes, getNotes, editNote } = context;
+    // let history = useNavigate();
 
     useEffect(() => {
 
-
         return () => {
             getNotes();
+
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const updateNote = (currentNote) => {
         ref.current.click();
         setnote({ id: currentNote._id, etitle: currentNote.title, etag: currentNote.tag, edescription: currentNote.description });
-        props.showAlert("Updated Successfully","success");
+        props.showAlert("Updated Successfully", "success");
 
     };
     const [ note, setnote ] = useState({ id: '', etitle: "", edescription: "", etag: 'default' });
@@ -29,7 +31,7 @@ function Notes(props) {
         refClose.current.click();
 
         e.preventDefault();
-        props.showAlert("Updated","danger");
+        props.showAlert("Updated", "danger");
 
     };
     const onChange = (e) => {
@@ -70,7 +72,7 @@ function Notes(props) {
                         </div>
                         <div className="modal-footer">
                             <button type="button" ref={refClose} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" disabled={note.etitle.length<5||note.edescription.lenght<5} onClick={handleClick} className="btn btn-primary">Save changes</button>
+                            <button type="button" disabled={note.etitle.length < 5 || note.edescription.lenght < 5} onClick={handleClick} className="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
@@ -79,7 +81,7 @@ function Notes(props) {
             <div className="row my-3">
                 <h1>Your Notes</h1>
                 <div className='container'>
-                {notes?.length === 0 && "No notes to display</div>"}
+                    {notes?.length === 0 && "No notes to display</div>"}
                 </div>
                 {notes.map((note) => {
                     return <NoteItem showAlert={props.showAlert} key={note._id} updateNote={updateNote} note={note} />;
